@@ -1,4 +1,5 @@
 const apiEndpoint = 'https://t0z0n5d2wg.execute-api.eu-central-1.amazonaws.com/prod/game/lines'
+
 const packageName = 'io.cmichel.rapquiz'
 const appName = 'RapQuiz'
 const mail = 'apps@cmichel.io'

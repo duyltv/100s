@@ -20,7 +20,7 @@ const codePush = {
 }
 
 const menuScreen = {
-  header: 'Welcome',
+  header: 'Quiz - Five Dogs',
 }
 
 const questionsScreen = {

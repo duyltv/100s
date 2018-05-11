@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ToastAndroid } from 'react-native'
+import { ToastAndroid, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import { Spinner } from 'native-base'
 import { connect } from 'react-redux'
@@ -19,11 +19,22 @@ import {
 } from '../store/navigation/actions'
 
 const screenStyles = {
-  padding: 15,
+  padding: 30,
 }
 
 const buttonStyles = {
   margin: 10,
+}
+
+const spaceStyles = {
+  marginTop: 5,
+  marginBottom: 10,
+  paddingLeft: 10,
+}
+
+const fixedBottomStyles = {
+  marginTop:10,
+  textAlign: 'center'
 }
 
 @connect(
@@ -70,6 +81,14 @@ export default class Menu extends Component {
     const disableButtons = isLoading || isUpdating
     return (
       <BackgroundView style={screenStyles}>
+        <Text style={spaceStyles}>
+            This is Quiz Appplications which was built by five dogs team. With varied of questions about life subject, fun subject...
+        </Text>
+
+        <Text style={spaceStyles}>
+          Now, you can start game to explore and feeling by way click on Play Game button below.
+        </Text>
+
         <Button
           style={buttonStyles}
           disabled={disableButtons}
@@ -88,6 +107,11 @@ export default class Menu extends Component {
           title={I18n.t('btn.settings')}
           onPress={this.onSettingsPressed}
         />
+
+        <Text style={fixedBottomStyles}>
+          Five Dogs Team.
+        </Text>
+
         {disableButtons && <Spinner />}
         {isUpdating && <ProgressBar progress={updateProgress} />}
       </BackgroundView>
