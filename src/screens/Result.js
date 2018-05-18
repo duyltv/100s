@@ -120,13 +120,6 @@ export default class Result extends Component {
           {this.renderScore()}
           {this.renderSharebar()}
           {this.renderReplayButton()}
-          {isLoading && <Spinner />}
-          <Body>
-            <H1 style={headerStyles}>
-              {I18n.t('result.title')}
-            </H1>
-          </Body>
-          {this.renderResultCards()}
         </ScrollView>
       </BackgroundView>
     )

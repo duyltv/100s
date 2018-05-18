@@ -52,7 +52,7 @@ export const ReplayButton = (props) => {
 export const AnswerButton = (props) => {
   const { title, ...otherProps } = props
   return (
-    <NBButton style={{ alignSelf: 'center', marginVertical: 5 }} rounded {...otherProps}>
+    <NBButton style={{ alignSelf: 'center', marginVertical: 5 , width:300}} rounded {...otherProps}>
       <Text numberOfLines={1} style={{}}>
         {title}
       </Text>
