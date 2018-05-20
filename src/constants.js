@@ -1,4 +1,4 @@
-const apiEndpoint = 'https://t0z0n5d2wg.execute-api.eu-central-1.amazonaws.com/prod/game/lines'
+const apiEndpoint = 'http://dattonhadep.com/quiz/samplequestion.php'
 
 const packageName = 'io.cmichel.rapquiz'
 const appName = 'RapQuiz'

@@ -4,7 +4,7 @@ import I18n from '../../i18n'
 import SettingsActionTypes from './actions'
 
 export const initialSettings = Immutable({
-  language: 'de',
+  language: 'en',
   freeVersion: true,
 })
 
