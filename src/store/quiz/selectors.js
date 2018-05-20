@@ -20,7 +20,7 @@ export const selectResultData = (state) => {
   const score = state.questions.reduce(
     (curScore, questionId, index) =>
       curScore +
-      (answers[index] === state.questionsById[questionId].correctArtistIndex
+      (answers[index] === state.questionsById[questionId].__v
         ? 1
         : 0),
     0,

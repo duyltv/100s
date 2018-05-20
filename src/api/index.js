@@ -10,7 +10,7 @@ import { apiEndpoint } from '../constants'
 //         ...line,
 //         id: line._id,
 //         possibleArtists: ['KIZ', 'Artist 1', 'Artist 2'],
-//         correctArtistIndex: 0,
+//         __v: 0,
 //       }))
 //       .slice(0, 3),
 //     line => line.id,
@@ -21,5 +21,5 @@ import { apiEndpoint } from '../constants'
 export function getNewGameData() {
   return fetch(apiEndpoint)
     .then(response => response.json())
-    .then(response => keyBy(response, line => line.id))
+    .then(response => keyBy(response['data'], line => line._id))
 }

@@ -1,4 +1,4 @@
-const apiEndpoint = 'http://dattonhadep.com/quiz/samplequestion.php'
+const apiEndpoint = 'https://mobile-app-fivedogs.herokuapp.com/questions/all'
 
 const packageName = 'io.cmichel.rapquiz'
 const appName = 'RapQuiz'

@@ -58,10 +58,13 @@ export default class Question extends Component {
     currentQuestionIndex: PropTypes.number.isRequired,
     numberOfQuestions: PropTypes.number.isRequired,
     question: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      possibleArtists: PropTypes.arrayOf(PropTypes.string.isRequired)
-        .isRequired,
-      correctArtistIndex: PropTypes.number.isRequired,
+      question: PropTypes.string.isRequired,
+      A: PropTypes.string.isRequired,
+      B: PropTypes.string.isRequired,
+      C: PropTypes.string.isRequired,
+      D: PropTypes.string.isRequired,
+      __v: PropTypes.number.isRequired,
+      result: PropTypes.string.isRequired,
     }).isRequired,
   };
 
@@ -111,13 +114,15 @@ export default class Question extends Component {
     const { answerIndex } = this.state
     if (answerIndex === -1) return { bordered: true }
 
-    const { correctArtistIndex } = this.props.question
+    const { result } = this.props.question
+
+    var __v = result.charCodeAt(0) - 'A'.charCodeAt(0);
     // always show correct artist with default green bg
-    if (correctArtistIndex === buttonIndex) return {}
+    if (__v === buttonIndex) return {}
     // display possible error on selected button
     if (answerIndex === buttonIndex) {
       return {
-        danger: answerIndex !== correctArtistIndex,
+        danger: answerIndex !== __v,
       }
     }
     return { bordered: true }
@@ -125,16 +130,33 @@ export default class Question extends Component {
 
   renderAnswerButtons = () => {
     const { question } = this.props
-    const { possibleArtists } = question
+    const { A, B, C, D } = question
 
-    return possibleArtists.map((artist, i) =>
+    return ([
       <AnswerButton
-        key={artist}
-        title={artist}
-        onPress={() => this.onAnswer(i)}
-        {...this.getAdditionalButtonProps(i)}
+        key={A}
+        title={A}
+        onPress={() => this.onAnswer(0)}
+        {...this.getAdditionalButtonProps(0)}
       />,
-    )
+      <AnswerButton
+        key={B}
+        title={B}
+        onPress={() => this.onAnswer(1)}
+        {...this.getAdditionalButtonProps(1)}
+      />,
+      <AnswerButton
+        key={C}
+        title={C}
+        onPress={() => this.onAnswer(2)}
+        {...this.getAdditionalButtonProps(2)}
+      />,
+      <AnswerButton
+        key={D}
+        title={D}
+        onPress={() => this.onAnswer(3)}
+        {...this.getAdditionalButtonProps(3)}
+      />])
   };
 
   renderProgress = () => {
@@ -154,8 +176,8 @@ export default class Question extends Component {
   };
 
   render() {
-    const { question, animationState } = this.props
-    const { text } = question
+    const { question: question_, animationState } = this.props
+    const { question } = question_
     return (
       <AnimatedView
         animationState={animationState}
@@ -172,7 +194,7 @@ export default class Question extends Component {
             fontWeight: 'bold',
           }}
         >
-          {text}
+          {question}
         </Text>
         <View style={styles.verticalContainer}>
           {this.renderAnswerButtons()}

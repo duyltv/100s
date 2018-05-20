@@ -7,14 +7,14 @@ import Anchor from './Anchor'
 
 export default class ResultCard extends Component {
   static propTypes = {
-    text: PropTypes.string.isRequired,
-    artist: PropTypes.string.isRequired,
-    songTitle: PropTypes.string.isRequired,
+    question: PropTypes.string.isRequired,
     answered: PropTypes.number.isRequired,
-    possibleArtists: PropTypes.arrayOf(PropTypes.string).isRequired,
-    correctArtistIndex: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string,
-    moreUrl: PropTypes.string,
+    A: PropTypes.string.isRequired,
+    B: PropTypes.string.isRequired,
+    C: PropTypes.string.isRequired,
+    D: PropTypes.string.isRequired,
+    __v: PropTypes.number.isRequired,
+    result: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -23,15 +23,17 @@ export default class ResultCard extends Component {
   };
 
   getAdditionalButtonProps = (buttonIndex) => {
-    const { answered, correctArtistIndex } = this.props
+    const { answered, result } = this.props
     const defaultButtonProps = {
       small: true,
     }
 
+    var __v = result.charCodeAt(0) - 'A'.charCodeAt(0);
+
     // 1. Correct button
-    if (correctArtistIndex === buttonIndex) {
+    if (__v === buttonIndex) {
       // correctly answered => green bg
-      if (answered === correctArtistIndex) {
+      if (answered === __v) {
         return {
           ...defaultButtonProps,
         }
@@ -46,7 +48,7 @@ export default class ResultCard extends Component {
     if (answered === buttonIndex) {
       return {
         ...defaultButtonProps,
-        danger: answered !== correctArtistIndex,
+        danger: answered !== __v,
       }
     }
     // 3. Non-correct, non-answered button => white border
@@ -54,37 +56,47 @@ export default class ResultCard extends Component {
   };
 
   renderAnswerButtons() {
-    const { possibleArtists } = this.props
-    return possibleArtists.map((artist, index) =>
+    const { A, B, C, D } = this.props
+    return ([
       <ResultAnswerButton
-        key={artist}
-        title={artist}
-        {...this.getAdditionalButtonProps(index)}
+        key={A}
+        title={A}
+        {...this.getAdditionalButtonProps(0)}
       />,
-    )
+      <ResultAnswerButton
+        key={B}
+        title={B}
+        {...this.getAdditionalButtonProps(1)}
+      />,
+      <ResultAnswerButton
+        key={C}
+        title={C}
+        {...this.getAdditionalButtonProps(2)}
+      />,
+      <ResultAnswerButton
+        key={D}
+        title={D}
+        {...this.getAdditionalButtonProps(3)}
+      />])
   }
 
   render() {
-    const { thumbnail, text, artist, songTitle, moreUrl } = this.props
+    const { question, result } = this.props
     return (
       <Card style={{ paddingHorizontal: 8, paddingVertical: 8 }}>
         <CardItem>
           <Left>
-            <Thumbnail large square source={{ uri: thumbnail }} />
             <Body>
               <Text>
-                {artist}
+                {result}
               </Text>
-              <Text>
-                {songTitle}
-              </Text>
-              <Anchor text={I18n.t('btn.lyrics')} url={moreUrl} />
+              <Anchor text={I18n.t('btn.lyrics')} />
             </Body>
           </Left>
         </CardItem>
         <CardItem style={{ padding: 10 }} cardBody>
           <Text>
-            {text}
+            {question}
           </Text>
         </CardItem>
         <CardItem>
